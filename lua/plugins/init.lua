@@ -1,0 +1,17 @@
+Gh = function(x) return 'https://github.com/' .. x end
+
+require("plugins.treesitter")
+require("plugins.whichkey")
+require("plugins.mini")
+require("plugins.snacks")
+require("plugins.clangd_extensions")
+-- require("plugins.lualine")
+require("plugins.nvim-lsp")
+require("plugins.nvim-cmp")
+require("plugins.noice")
+require("plugins.trouble")
+require("plugins.mason")
+require("plugins.colorizer")
+require("plugins.dap")
+require("plugins.vim-suda")
+require("plugins.yazi")
