@@ -1,4 +1,4 @@
 vim.pack.add({
-  Gh('neovim/nvim-lspconfig'),
-  Gh('MysticalDevil/inlay-hints.nvim')
+	Gh("neovim/nvim-lspconfig"),
+	Gh("MysticalDevil/inlay-hints.nvim"),
 })

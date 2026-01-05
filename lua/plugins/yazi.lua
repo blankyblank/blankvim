@@ -1,6 +1,6 @@
 vim.pack.add({
-  Gh('mikavilpas/yazi.nvim'),
-  Gh('nvim-lua/plenary.nvim')
+	Gh("mikavilpas/yazi.nvim"),
+	Gh("nvim-lua/plenary.nvim"),
 })
 
 -- vim.keymap.set("n", "<leader>-", function()
@@ -9,9 +9,9 @@ vim.pack.add({
 
 vim.g.loaded_netrwPlugin = 1
 vim.api.nvim_create_autocmd("UIEnter", {
-  callback = function()
-    require("yazi").setup({
-      open_for_directories = true,
-    })
-  end,
+	callback = function()
+		require("yazi").setup({
+			open_for_directories = true,
+		})
+	end,
 })

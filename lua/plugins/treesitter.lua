@@ -1,31 +1,31 @@
 vim.pack.add({
-  {
-    src = Gh('nvim-treesitter/nvim-treesitter'),
-    version = 'main'
-  },
-  {
-    src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-    version = "main",
-  },
+	{
+		src = Gh("nvim-treesitter/nvim-treesitter"),
+		version = "main",
+	},
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+		version = "main",
+	},
 })
 
-require'nvim-treesitter'.setup {
-  install_dir = vim.fn.stdpath('data') .. '/site',
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = { 'ruby' },
-  },
-  indent = { enable = true, disable = { 'ruby' } },
-}
+require("nvim-treesitter").setup({
+	install_dir = vim.fn.stdpath("data") .. "/site",
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = { "ruby" },
+	},
+	indent = { enable = true, disable = { "ruby" } },
+})
 
 require("nvim-treesitter-textobjects").setup({
 	select = {

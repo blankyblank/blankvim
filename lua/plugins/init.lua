@@ -1,14 +1,17 @@
-Gh = function(x) return 'https://github.com/' .. x end
+Gh = function(x)
+	return "https://github.com/" .. x
+end
 
 require("plugins.treesitter")
 require("plugins.whichkey")
 require("plugins.mini")
 require("plugins.snacks")
 require("plugins.clangd_extensions")
--- require("plugins.lualine")
+require("plugins.conform")
 require("plugins.nvim-lsp")
 require("plugins.nvim-cmp")
 require("plugins.noice")
+require("plugins.lualine")
 require("plugins.trouble")
 require("plugins.mason")
 require("plugins.colorizer")

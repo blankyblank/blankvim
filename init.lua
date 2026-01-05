@@ -5,10 +5,10 @@ highlight NonText guibg=none
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 ]])
-local highlight = { "CursorLine", "Whitespace", }
+local highlight = { "CursorLine", "Whitespace" }
 
 autocmd = vim.api.nvim_create_autocmd
-vim.have_nerd_font = true
+vim.have_nerd_font = false
 vim.opt.termguicolors = true
 
 require("plugins")
