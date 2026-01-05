@@ -28,7 +28,7 @@ require("snacks").setup({
 	words = { enabled = false },
 
 	indent = {
-		enabled = true,
+		enabled = false,
 		only_scope = true,
 		animate = { enabled = false },
 		scope = {

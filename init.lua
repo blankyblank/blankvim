@@ -8,7 +8,7 @@ highlight NonText ctermbg=none
 local highlight = { "CursorLine", "Whitespace" }
 
 autocmd = vim.api.nvim_create_autocmd
-vim.have_nerd_font = false
+vim.have_nerd_font = true
 vim.opt.termguicolors = true
 
 require("plugins")
