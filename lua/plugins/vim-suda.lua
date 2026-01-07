@@ -1,3 +1,3 @@
 vim.pack.add({
-	Gh("lambdalisue/vim-suda"),
+  Gh("lambdalisue/vim-suda"),
 })

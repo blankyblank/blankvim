@@ -1,5 +1,5 @@
 return {
-  cmd = { "/home/blank/.local/share/nvim/mason/bin/lua-language-server" },
+  cmd = { "/home/blank/.local/share/nvim/mason/bin/emmylua_ls" },
 
   on_init = function(client)
     if client.workspace_folders then

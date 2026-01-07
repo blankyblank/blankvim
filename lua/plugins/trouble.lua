@@ -1,3 +1,3 @@
 vim.pack.add({
-	Gh("folke/trouble.nvim"),
+  Gh("folke/trouble.nvim"),
 })

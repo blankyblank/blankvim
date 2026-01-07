@@ -48,6 +48,31 @@ hi! link Tag Special
 hi! link Typedef Type
 hi! link lCursor Cursor
 hi! link debugPC CursorLine
+hi! link DiagnosticError DiagnosticVirtualTextError
+hi! link DiagnosticError DiagnosticVirtualLinesError
+hi! link DiagnosticError DiagnosticUnderlineError
+hi! link DiagnosticError DiagnosticFloatingError
+hi! link DiagnosticError DiagnosticSignError
+hi! link DiagnosticWarn DiagnosticVirtualTextWarn
+hi! link DiagnosticWarn DiagnosticVirtualLinesWarn
+hi! link DiagnosticWarn DiagnosticUnderlineWarn
+hi! link DiagnosticWarn DiagnosticFloatingWarn
+hi! link DiagnosticWarn DiagnosticSignWarn
+hi! link DiagnosticInfo DiagnosticVirtualTextInfo
+hi! link DiagnosticInfo DiagnosticVirtualLinesInfo
+hi! link DiagnosticInfo DiagnosticUnderlineInfo
+hi! link DiagnosticInfo DiagnosticFloatingInfo
+hi! link DiagnosticInfo DiagnosticSignInfo
+hi! link DiagnosticHint DiagnosticVirtualTextHint
+hi! link DiagnosticHint DiagnosticVirtualLinesHint
+hi! link DiagnosticHint DiagnosticUnderlineHint
+hi! link DiagnosticHint DiagnosticFloatingHint
+hi! link DiagnosticHint DiagnosticSignHint
+hi! link DiagnosticOk DiagnosticVirtualTextOk
+hi! link DiagnosticOk DiagnosticVirtualLinesOk
+hi! link DiagnosticOk DiagnosticUnderlineOk
+hi! link DiagnosticOk DiagnosticFloatingOk
+hi! link DiagnosticOk DiagnosticSignOk
 
 if (has('termguicolors') && &termguicolors) || has('gui_running')
   let g:terminal_ansi_colors = ['#3F4451', '#E06C75', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#D7DAE0', '#4F5666', '#BE5046', '#A5E075', '#E5C07B', '#4DC4FF', '#DE73FF', '#4CD1E0', '#E6E6E6']
@@ -56,6 +81,12 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
     let g:terminal_color_{i} = g:terminal_ansi_colors[i]
   endfor
 endif
+
+hi DiagnosticError guifg=#E06C75
+hi DiagnosticWarn guifg=#D19A66
+hi DiagnosticInfo guifg=#ABB2BF
+hi DiagnosticHint guifg=#D7DAE0
+hi DiagnosticOk guifg=#98C379
 hi Normal guifg=#ABB2BF guibg=#282C34 gui=NONE cterm=NONE
 hi Added guifg=#98C379 guibg=NONE gui=NONE cterm=NONE
 hi Changed guifg=#61AFEF guibg=NONE gui=NONE cterm=NONE

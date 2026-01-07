@@ -2,13 +2,13 @@ set = vim.o
 
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({
-	pattern = {
-		[".*/kitty/*.conf"] = "bash",
-		[".*/tofi/config"] = "config",
-		["*.h"] = "c",
-		--    ['.*/hypr/.*%.conf'] = 'hyprlang',
-		[".*/nvimbacks/.*%.conf"] = "hyprlang",
-	},
+  pattern = {
+    [".*/kitty/*.conf"] = "bash",
+    [".*/tofi/config"] = "config",
+    ["*.h"] = "c",
+    --    ['.*/hypr/.*%.conf'] = 'hyprlang',
+    [".*/nvimbacks/.*%.conf"] = "hyprlang",
+  },
 })
 
 vim.cmd([[
