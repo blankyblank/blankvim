@@ -89,10 +89,14 @@ vim.keymap.set('n', "<leader>fu", "<cmd>lua Snacks.picker.undo()<CR>", { desc = 
 vim.keymap.set('n', "<leader>fU", "<cmd>Undotree<CR>", { desc = "Undo History" })
 vim.keymap.set('n', "<leader>fc", '<cmd>lua Snacks.picker.files({ cwd = vim.fn.stdpath("config") })<CR>',
   { desc = "Find Config File" })
+vim.keymap.set('n', "<leader>fj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
+vim.keymap.set('n', "<leader>fk", "<cmd>lua Snacks.picker.keymaps() <CR>", { desc = "Keymaps" })
+vim.keymap.set('n', "<leader>fS", "<cmd>lua Snacks.scratch.select()<CR>", { desc = "Select Scratch Buffer" })
+vim.keymap.set('n', "<leader>u.", "<cmd>lua Snacks.scratch()<CR>", { desc = "Toggle Scratch Buffer" })
 
-vim.keymap.set('n', "<leader>es", "<cmd>lua Snacks.explorer()<CR>", { desc = "File Explorer" })
-vim.keymap.set('n', "<leader>em", "<cmd>lua MiniFiles.open()<CR>")
-vim.keymap.set('n', '<leader>ey', '<cmd>Yazi<cr>', { desc = 'Open yazi at the current file' })
+vim.keymap.set('n', "<leader>et", "<cmd>lua Snacks.explorer()<CR>", { desc = "File Explorer" })
+vim.keymap.set('n', "<leader>ee", "<cmd>lua MiniFiles.open()<CR>")
+vim.keymap.set('n', '<leader>ef', '<cmd>Yazi<cr>', { desc = 'Open yazi at the current file' })
 vim.keymap.set('n', '<leader>ed', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
 vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
 
@@ -104,8 +108,6 @@ vim.keymap.set('n', "<leader>gS", "<cmd>lua Snacks.picker.git_stash()<CR>", { de
 vim.keymap.set('n', "<leader>gd", "<cmd>lua Snacks.picker.git_diff()<CR>", { desc = "Git Diff (Hunks)" })
 vim.keymap.set('n', "<leader>gf", "<cmd>lua Snacks.picker.git_log_file()<CR>", { desc = "Git Log File" })
 vim.keymap.set('n', "<leader>gf", "<cmd>lua Snacks.picker.git_files()<CR>", { desc = "Find Git Files" })
-vim.keymap.set('n', "<leader>u.", "<cmd>lua Snacks.scratch()<CR>", { desc = "Toggle Scratch Buffer" })
-vim.keymap.set('n', "<leader>S", "<cmd>lua Snacks.scratch.select()<CR>", { desc = "Select Scratch Buffer" })
 vim.keymap.set('n', "<c-/>", "<cmd>lua Snacks.terminal.toggle() <CR>", { desc = "Toggle Terminal" })
 vim.keymap.set('n', "<c-_>", "<cmd>lua Snacks.terminal() <CR>", { desc = "which_key_ignore" })
 
@@ -141,11 +143,7 @@ vim.keymap.set('n', "<leader>dl", "<cmd>Trouble lsp toggle focus=false win.posit
 
 
 --vim.keymap.set("n", "<leader>dd", ":DapViewToggle<CR>", { desc = "toggle debug adapter" })
-
 -- { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
--- { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
--- { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
 -- { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
--- { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc
--- = "Next Reference", mode = { "n", "t" } },
+-- { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
 -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },

@@ -15,13 +15,13 @@ return {
   root_markers = {
     'compile_commands.json',
     'compile_flags.txt',
-    'configure.ac', -- AutoTools
+    'configure.ac',
     'Makefile',
     'meson.build',
     'meson_options.txt',
     '.git',
   },
-  filetypes = { 'c', 'h' },
+  filetypes = { 'c' },
   init_options = {
     usePlaceholders = true,
     completeUnimported = true,
@@ -58,4 +58,5 @@ return {
       insertTextMode = 1,
     },
   },
+  settings = {},
 }

@@ -5,10 +5,9 @@ vim.pack.add({
   Gh('hrsh7th/cmp-path'),
   Gh('hrsh7th/cmp-buffer'),
   Gh('hrsh7th/cmp-cmdline'),
-  -- Gh('echasnovski/mini.snippets'),
-  -- Gh('abeldekat/cmp-mini-snippets'),
-  Gh('hrsh7th/cmp-vsnip'),
-  Gh('hrsh7th/vim-vsnip'),
+  Gh('abeldekat/cmp-mini-snippets'),
+  -- Gh('hrsh7th/cmp-vsnip'),
+  -- Gh('hrsh7th/vim-vsnip'),
   -- Gh("L3MON4D3/LuaSnip"),
   -- Gh("saadparwaiz1/cmp_luasnip"),
 })
@@ -39,12 +38,12 @@ require('mini.snippets').setup({
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- local insert = MiniSnippets.config.expand.insert or
-      -- MiniSnippets.default_insert
-      -- insert({ body = args.body }) -- Insert at cursor
-      -- cmp.resubscribe({ 'TextChangedI', 'TextChangedP' })
-      -- require('cmp.config').set_onetime({ sources = {} })
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      local insert = MiniSnippets.config.expand.insert or
+          MiniSnippets.default_insert
+      insert({ body = args.body }) -- Insert at cursor
+      cmp.resubscribe({ 'TextChangedI', 'TextChangedP' })
+      require('cmp.config').set_onetime({ sources = {} })
+      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
       -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
@@ -100,14 +99,14 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    -- {
-    --   name = 'mini.snippets',
-    --   options = {
-    --     use_minisnippets_match_rule = false,
-    --     only_allow_inline_start = false,
-    --   },
-    -- },
-    { name = 'vsnip' },
+    {
+      name = 'mini.snippets',
+      options = {
+        use_minisnippets_match_rule = false,
+        only_allow_inline_start = false,
+      },
+    },
+    -- { name = 'vsnip' },
     -- { name = 'luasnip' },
   }, {
     { name = 'path' },

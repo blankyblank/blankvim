@@ -2,20 +2,17 @@ vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
 
 require('conform').setup({
   formatters_by_ft = {
-    lua = { 'emmylua_codeformat' },
+    lua = { lsp_format = 'first', },
     c = { 'clang-format' },
-    -- go = { "goimports", "gofmt" },
+    sh = { 'shfmt' },
     -- python = { "ruff_format", "black", stop_after_first = true },
     -- json = { "biome", "prettier", stop_after_first = true },
     -- markdown = { "prettier" },
-    -- javascript = { "biome", "prettier", stop_after_first = true },
-    -- typescript = { "biome", "prettier", stop_after_first = true },
-    -- javascriptreact = { "biome", "prettier", stop_after_first = true },
-    -- typescriptreact = { "biome", "prettier", stop_after_first = true },
     -- css = { "prettier" },
     -- html = { "prettier" },
     -- toml = { "taplo" },
   },
+  formatters = {},
   -- formatters = {
   -- 	biome = { require_cwd = true },
   -- },
@@ -34,9 +31,16 @@ require('conform').setup({
     if bufname:match('/node_modules/') then
       return
     end
-    return { timeout_ms = 500, lsp_format = 'fallback' }
+    return { timeout_ms = 600, lsp_format = 'fallback' }
   end,
 })
+
+require('conform').formatters.shfmt = {
+  inherit = false,
+  command = 'shfmt',
+  append_args = { '-i', '2', '-s', '-bn' },
+  --"-kp", "-mn"
+}
 
 vim.api.nvim_create_user_command('FormatDisable', function(opts)
   if opts.bang then
