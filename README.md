@@ -1,6 +1,6 @@
 # BlankVim
 
-THis is just my personal config. At this point it has as much stuff as lazyvim or something.
+This is just my personal config. At this point it has as much stuff as lazyvim or something.
 
 Nothing special. I do try to keep the actual ui pretty minimal outside of the linenumbers and a bar. 
 
