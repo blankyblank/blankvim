@@ -4,7 +4,7 @@ vim.pack.add({
   Gh('nvim-mini/mini.align'),
   Gh('nvim-mini/mini.bracketed'),
   Gh('nvim-mini/mini.diff'),
-  Gh('nvim-mini/mini.git'),
+  Gh('nvim-mini/mini-git'),
   Gh('nvim-mini/mini.icons'),
   Gh('nvim-mini/mini.jump'),
   Gh('nvim-mini/mini.move'),
