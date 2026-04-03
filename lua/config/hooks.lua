@@ -1,4 +1,9 @@
 local M = {}
+
+Gh = function(x)
+  return 'https://github.com/' .. x
+end
+
 -- NOTE: put hooks in this that need to run early.
 
 -- to install jsregexp for LuaSnip

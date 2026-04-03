@@ -1,5 +1,11 @@
 local M = {}
 
+autocmd = vim.api.nvim_create_autocmd
+vim.have_nerd_font = true
+vim.opt.termguicolors = true
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 M.version = "0.1.0"
 M.disabled_plugins = {}
 M.extras = {}
