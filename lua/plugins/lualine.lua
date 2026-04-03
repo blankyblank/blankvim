@@ -1,5 +1,7 @@
 local M = {}
 
+vim.pack.add({ Gh("nvim-lualine/lualine.nvim") })
+
 local custom_onedark = require("lualine.themes.onedark")
 custom_onedark.normal.c.bg = "#282C34"
 
@@ -45,8 +47,6 @@ M.defaults = {
     lualine_z = {},
   },
 }
-
-vim.pack.add({ Gh("nvim-lualine/lualine.nvim") })
 
 require("lualine").setup(M.defaults)
 
