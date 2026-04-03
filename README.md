@@ -7,7 +7,7 @@ A Neovim distro using Neovim's built-in `vim.pack` package manager.
 ### 1. Install the template config
 
 ```bash
-git clone https://github.com/blankyblank/blankvim.git ~/.config/nvim
+git clone https://github.com/blankyblank/blankvim-template.git ~/.config/nvim
 ```
 
 ### 2. Start Neovim
