@@ -1,3 +1,8 @@
+vim.pack.add({
+  Gh('mini.comment'),
+  Gh('mini.files'),
+})
+
 require('mini.comment').setup({ options = { ignore_blank_line = true } })
 require('mini.files').setup({ options = { use_as_default_explorer = false } })
 

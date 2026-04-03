@@ -1,3 +1,5 @@
+vim.pack.add({Gh('mini.statusline')})
+
 local mystatus = function()
 	local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
 	local git = MiniStatusline.section_git({ trunc_width = 40 })
