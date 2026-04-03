@@ -1,7 +1,6 @@
-vim.pack.add({ Gh("catgoose/nvim-colorizer.lua") })
--- "https://github.com/catgoose/nvim-colorizer.lua"
+local M = {}
 
-require("colorizer").setup({
+M.defaults = {
   user_commands = true,
   options = {
     parsers = {
@@ -14,20 +13,20 @@ require("colorizer").setup({
       },
       hex = {
         default = false,
-        rgb = true,      -- #RGB
-        rgba = true,     -- #RGBA
-        rrggbb = true,   -- #RRGGBB
-        rrggbbaa = true, -- #RRGGBBAA
-        aarrggbb = true, -- 0xAARRGGBB
+        rgb = true,
+        rgba = true,
+        rrggbb = true,
+        rrggbbaa = true,
+        aarrggbb = true,
       },
       rgb = { enable = true, },
       hsl = { enable = true, },
-      -- names = false,
-      -- names_opts = { lowercase = false },
-      -- RRGGBBAA = true,
-      -- RGBA = true,
-      -- rgb_fn = true,
-      -- hsl_fn = true,
     },
   },
-})
+}
+
+vim.pack.add({ Gh("catgoose/nvim-colorizer.lua") })
+
+require("colorizer").setup(M.defaults)
+
+return M

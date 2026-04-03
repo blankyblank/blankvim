@@ -1,3 +1,31 @@
+local M = {}
+
+M.defaults = {
+  install_dir = vim.fn.stdpath('data') .. '/site',
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = { 'ruby' },
+  },
+  indent = { enable = true, disable = { 'ruby' } },
+}
+
+M.textobjects_defaults = {
+  select = {
+    enable = true,
+    lookahead = true,
+    selection_modes = {
+      ['@parameter.outer'] = 'v',
+      ['@function.outer'] = 'V',
+      ['@class.outer'] = '<c-v>',
+    },
+    include_surrounding_whitespace = true,
+  },
+  move = {
+    enable = true,
+    set_jumps = true,
+  },
+}
+
 vim.pack.add({
   {
     src = Gh('nvim-treesitter/nvim-treesitter'),
@@ -6,19 +34,10 @@ vim.pack.add({
   {
     src = Gh('nvim-treesitter/nvim-treesitter-textobjects'),
     version = 'main',
-    --https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 })
 
-
-require('nvim-treesitter').setup({
-  install_dir = vim.fn.stdpath('data') .. '/site',
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = { 'ruby' },
-  },
-  indent = { enable = true, disable = { 'ruby' } },
-})
+require('nvim-treesitter').setup(M.defaults)
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '*' },
@@ -27,7 +46,6 @@ vim.api.nvim_create_autocmd('FileType', {
     local lang = vim.treesitter.language.get_lang(ft) or ft
     local buf = event.buf
 
-    -- Auto-install missing parsers asynchronously
     if not vim.treesitter.language.add(lang) then
       local available = vim.g.ts_available or require('nvim-treesitter').get_available()
       if not vim.g.ts_available then vim.g.ts_available = available end
@@ -36,11 +54,8 @@ vim.api.nvim_create_autocmd('FileType', {
       end
     end
 
-    -- Start tree-sitter once the language is added
     if vim.treesitter.language.add(lang) then
       vim.treesitter.start(buf, lang)
-      
-      -- Enable indentation if the language supports it
       if vim.treesitter.query.get(lang, "indents") then
         vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
@@ -48,23 +63,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('nvim-treesitter-textobjects').setup({
-  select = {
-    enable = true,
-    lookahead = true,
-    selection_modes = {
-      ['@parameter.outer'] = 'v', -- charwise
-      ['@function.outer'] = 'V',  -- linewise
-      ['@class.outer'] = '<c-v>', -- blockwise
-    },
-    include_surrounding_whitespace = true,
-  },
-  move = {
-    enable = true,
-    set_jumps = true,
-  },
-})
--- SELECT keymaps
+require('nvim-treesitter-textobjects').setup(M.textobjects_defaults)
+
 local sel = require('nvim-treesitter-textobjects.select')
 for _, map in ipairs({
   { { 'x', 'o' }, 'af', '@function.outer' },
@@ -81,7 +81,6 @@ for _, map in ipairs({
   end, { desc = 'Select ' .. map[3] })
 end
 
--- MOVE keymaps
 local mv = require('nvim-treesitter-textobjects.move')
 for _, map in ipairs({
   { { 'n', 'x', 'o' }, ']m', mv.goto_next_start,     '@function.outer' },
@@ -94,24 +93,10 @@ for _, map in ipairs({
   { { 'n', 'x', 'o' }, '[o', mv.goto_previous_start, { '@loop.inner', '@loop.outer' } },
 }) do
   local modes, lhs, fn, query = map[1], map[2], map[3], map[4]
-  -- build a human-readable desc
   local qstr = (type(query) == 'table') and table.concat(query, ',') or query
   vim.keymap.set(modes, lhs, function()
     fn(query, 'textobjects')
   end, { desc = 'Move to ' .. qstr })
 end
 
--- NOTE:
---      uncomment if you want to enable folding
---      with tree-sitter
-
--- vim.api.nvim_create_autocmd('FileType', {
---   callback = function()
---     -- Enable syntax highlighting
---     vim.treesitter.start()
---     -- vim.wo.foldmethod = 'expr'
---     -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
---     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
---   end,
--- })
--- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+return M

@@ -1,9 +1,13 @@
+local M = {}
+
+M.defaults = {
+  commands = { enable = true },
+  autocmd = { enable = false },
+}
+
 vim.pack.add({ Gh("MysticalDevil/inlay-hints.nvim") })
 
-require("inlay-hints").setup({
-  commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
-  autocmd = { enable = false }, -- Enable the inlay hints on `LspAttach` event
-})
+require("inlay-hints").setup(M.defaults)
 
 on_attach = function(client, bufnr)
   if client.server_capabilities.inlayHintProvider then
@@ -13,3 +17,5 @@ on_attach = function(client, bufnr)
     print("no inlay hints available")
   end
 end
+
+return M

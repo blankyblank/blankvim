@@ -1,10 +1,15 @@
-vim.pack.add({ Gh('DrKJeff16/project.nvim') })
--- https://github.com/DrKJeff16/project.nvim
+local M = {}
 
-require('project').setup({
+M.defaults = {
   enable_autochdir = true,
   snacks = {
     enabled = true,
     enable_autochdir = true,
   }
-})
+}
+
+vim.pack.add({ Gh('DrKJeff16/project.nvim') })
+
+require('project').setup(M.defaults)
+
+return M

@@ -4,28 +4,22 @@ A Neovim distro using Neovim's built-in `vim.pack` package manager.
 
 ## Installation
 
-### 1. Install the distro
+### 1. Install the template config
 
 ```bash
-# Clone to your Neovim data directory
-git clone https://github.com/YOUR_USERNAME/blankvim-distro.git ~/.local/share/nvim/site/pack/blankvim/start/blankvim-distro
+git clone https://github.com/blankyblank/blankvim.git ~/.config/nvim
 ```
 
-### 2. Create your user config
+### 2. Start Neovim
 
-Create `~/.config/nvim/init.lua`:
-
-```lua
-require("blankvim").setup()
-```
-
-That's it. The distro loads automatically from the site/pack path.
+The distro installs itself automatically on first run.
 
 ## Customizing
 
-Override settings by creating files in your `lua/` directory. Files with the same path as distro files take precedence.
+Override settings in your `lua/` directory.
 
 For example, to override options, create:
+
 ```
 ~/.config/nvim/lua/config/options.lua
 ```
@@ -33,6 +27,7 @@ For example, to override options, create:
 ### Adding Plugins
 
 Add extra plugins in:
+
 ```
 ~/.config/nvim/lua/plugins/extra.lua
 ```
@@ -41,6 +36,20 @@ Add extra plugins in:
 vim.pack.add({
   { src = "https://github.com/you/your-plugin" }
 })
+```
+
+### Overriding Plugin Config
+
+Each plugin exports its defaults. To override a plugin's settings, create the file yourself and use `vim.tbl_deep_extend`:
+
+```lua
+-- ~/.config/nvim/lua/plugins/snacks.lua
+local snacks = require('blankvim.plugins.snacks')
+
+require('snacks').setup(vim.tbl_deep_extend('force', snacks.defaults, {
+  bigfile = { enabled = false },  -- disable bigfile detection
+  notifier = { enabled = true },  -- enable the notifier
+}))
 ```
 
 ## Disabling Plugins
@@ -62,15 +71,16 @@ require("blankvim").setup({
 ```
 
 Available extras:
+
 - `dap` - Debugger Adapter Protocol
-- `lf` - File manager
-- `neovim-project` - Project management
+- `neovim-project` - Project management alternative to project.nvim which this uses by default
 - `noice` - Alternative UI for messages/cmdline
 - `trouble` - LSP diagnostics list
 - `whichkey` - Keybinding hints
-- `yazi` - File picker
-- `ministatus` - Statusline
-- `mini` - Additional mini.nvim modules
+- `lf` - File manager plugin for lf users (it was a bit buggy when I tested it on st at least)
+- `yazi` - File manager plugin for yazi users
+- `ministatus` - Alternative statusline
+- `mini` - Additional mini.nvim modules (comment and files)
 
 ## Structure
 

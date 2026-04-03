@@ -1,9 +1,9 @@
-vim.pack.add({ Gh("nvim-lualine/lualine.nvim") })
+local M = {}
 
 local custom_onedark = require("lualine.themes.onedark")
 custom_onedark.normal.c.bg = "#282C34"
 
-require("lualine").setup({
+M.defaults = {
   options = {
     icons_enabled = true,
     theme = custom_onedark,
@@ -17,13 +17,10 @@ require("lualine").setup({
 
   extensions = { 'nvim-tree', 'man', 'mason', 'quickfix' },
   tabline = {
-    -- TODO: find highlight group for lualine_a tabline and change
-    -- lualine_a = {'buffers'},
     lualine_b = {'buffers'},
   },
   sections = {
     lualine_a = { "mode" },
-      -- TODO: might remove, i'll test for a bit
     lualine_b = { { "project", format = 'short', no_project = nil, } },
     lualine_c = {
       "branch",
@@ -43,14 +40,14 @@ require("lualine").setup({
       "lsp_status",
       "diagnostics",
       "filetype",
-      -- NOTE: leaving just in case I add noice back for some reason
-      -- {
-      --   require("noice").api.status.mode.get,
-      --   cond = require("noice").api.status.mode.has,
-      --   color = { fg = "#E06C75" },
-      -- },
     },
     lualine_y = {},
     lualine_z = {},
   },
-})
+}
+
+vim.pack.add({ Gh("nvim-lualine/lualine.nvim") })
+
+require("lualine").setup(M.defaults)
+
+return M

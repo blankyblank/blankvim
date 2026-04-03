@@ -1,7 +1,6 @@
-vim.pack.add({ Gh('folke/snacks.nvim') })
+local M = {}
 
-local Snacks = require('snacks')
-require('snacks').setup({
+M.defaults = {
   animate = { enabled = false },
   scroll = { enabled = false },
   words = { enabled = true },
@@ -19,7 +18,7 @@ require('snacks').setup({
     only_scope = true,
     only_current = true,
     animate = { enabled = false },
-    chunk = { 
+    chunk = {
       enabled = true,
       only_current = true,
     },
@@ -37,14 +36,6 @@ require('snacks').setup({
     icons = { files = { enabled = false } },
     layout = { preview = "main", preset = "ivy", },
   },
-
-  -- statuscolumn = {
-  --   enabled = false,
-  --   left = { 'git', 'sign' }, right = { '', '' },
-  --   folds = { open = false, git_hl = false },
-  --   git = { patterns = { 'GitSign', 'MiniDiffSign' } },
-  --   refresh = 50, -- refresh at most every 50ms
-  -- },
 
   terminal = {
     enabled = true,
@@ -72,47 +63,10 @@ require('snacks').setup({
       inlay_hints = false,
     },
     center = false,
-    -- zoom = {
-    --   center = true,
-    --     win = {
-    --       backdrop = false,
-    --       width = 0, -- full width
-    --     },
-    -- },
   },
 
-  -- NOTE: set to true and uncomment below to use the dashboard
   dashboard = {
     enabled = false,
-    --[[ padding = 4,
-    indent = 2,
-    sections = {
-      { section = "header" },
-      -- { section = "keys", gap = 1, padding = 1 },
-      { icon = "󱋡 ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')", padding = 1, indent = 2 },
-      { icon = " ", key = "d", desc = "Start Debug Session", action = "<Cmd>LaunchTermDebug<CR>", padding = 1, indent = 2 },
-      { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')", padding = 1, indent = 2 },
-      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert", padding = 1, indent = 2 },
-      { icon = "󰺯 ", key = "g", desc = "Search Text", action = ":lua Snacks.dashboard.pick('live_grep')", padding = 1, indent = 2 },
-      { icon = " ", key = "p", desc = "Select Project", action = ":ProjectSnacks", padding = 1, indent = 2 },
-      { icon = " ", key = "P", desc = "Recent Projects", action = ":ProjectRecents", padding = 1, indent = 2 },
-      { icon = " ", key = "c", desc = "Edit Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", padding = 1, indent = 2 },
-      {
-        icon = " ",
-        key = "h",
-        desc = "Find Documentation",
-        padding = 1,
-        indent = 2,
-        action = function()
-          Snacks.picker.help({
-            confirm = function(picker, item)
-              picker:action("jump")
-            end
-          })
-        end,
-      },
-      { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
-    }, ]]
   },
 
   styles = {
@@ -133,7 +87,12 @@ require('snacks').setup({
       },
      }
   }
-})
+}
+
+vim.pack.add({ Gh('folke/snacks.nvim') })
+
+local Snacks = require('snacks')
+require('snacks').setup(M.defaults)
 
 vim.api.nvim_create_autocmd('User', {
   callback = function()
@@ -143,7 +102,7 @@ vim.api.nvim_create_autocmd('User', {
     _G.bt = function()
       Snacks.debug.backtrace()
     end
-    if vim.fn.has('nvim-0.11') == 1 then -- Override print to use snacks for `:=` command
+    if vim.fn.has('nvim-0.11') == 1 then
       vim._print = function(_, ...)
         dd(...)
       end
@@ -169,17 +128,4 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
--- fix problem with indent line on dashboard when using mini.indentscope
---
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "snacks_dashboard",
---   callback = function()
---     vim.b.miniindentscope_disable = true
---   end,
--- })
--- vim.api.nvim_create_autocmd("User", {
---   pattern = "SnacksDashboardOpened",
---   callback = function(data)
---     vim.b[data.buf].miniindentscope_disable = true
---   end,
--- })
+return M

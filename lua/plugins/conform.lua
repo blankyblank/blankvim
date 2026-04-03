@@ -1,7 +1,6 @@
-vim.pack.add({ Gh('stevearc/conform.nvim') })
--- 'https://github.com/stevearc/conform.nvim'
---
-require('conform').setup({
+local M = {}
+
+M.defaults = {
   formatters_by_ft = {
     lua = { lsp_format = 'first', },
     c = { 'clang-format' },
@@ -12,32 +11,33 @@ require('conform').setup({
   default_format_opts = {
     lsp_format = 'fallback',
   },
-  -- format_on_save = false,
-
-    format_on_save = function(bufnr)
-      local ignore_filetypes = { 'sh', 'lua', 'c', 'sql', 'yaml', 'yml' }
-      if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-        return
-      end
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
-      local bufname = vim.api.nvim_buf_get_name(bufnr)
-      if bufname:match('/node_modules/') then
-        return
-      end
-      return { timeout_ms = 600, lsp_format = 'fallback' }
-    end,
-})
-require('conform').formatters.shfmt = {
-  -- inherit = false,
-  command = 'shfmt',
-  append_args = { '-i', '2', '-s', '-bn' },
-  --"-kp", "-mn"
+  format_on_save = function(bufnr)
+    local ignore_filetypes = { 'sh', 'lua', 'c', 'sql', 'yaml', 'yml' }
+    if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+      return
+    end
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+      return
+    end
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    if bufname:match('/node_modules/') then
+      return
+    end
+    return { timeout_ms = 600, lsp_format = 'fallback' }
+  end,
 }
 
+M.formatters = {
+  shfmt = {
+    command = 'shfmt',
+    append_args = { '-i', '2', '-s', '-bn' },
+  },
+}
 
--- NOTE: keymaps and commands
+vim.pack.add({ Gh('stevearc/conform.nvim') })
+
+require('conform').setup(M.defaults)
+require('conform').formatters.shfmt = M.formatters.shfmt
 
 vim.keymap.set({ 'n', 'v' }, '<leader>cn', '<cmd>ConformInfo<cr>', { desc = 'Conform Info' })
 
@@ -48,9 +48,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
     end
   end)
 end, { desc = 'Format buffer' })
-
-
--- INFO: use if you decide to enable autoformat-on-save use these to toggle it
 
 vim.api.nvim_create_user_command('FormatDisable', function(opts)
   if opts.bang then
@@ -78,8 +75,6 @@ vim.keymap.set('n', '<leader>tf', function()
   end
 end, { desc = 'Toggle Autoformat' })
 
--- NOTE: replace the builtin gw format keymap with conforms formatting below
-
 vim.keymap.set("v", "gw", function()
   require("conform").format({ async = true }, function(err)
     if not err then
@@ -106,3 +101,5 @@ vim.keymap.set("n", "gw", function()
   vim.go.operatorfunc = "v:lua._G.conform_format_func"
   vim.api.nvim_feedkeys("g@", "n", false)
 end)
+
+return M

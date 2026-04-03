@@ -1,11 +1,10 @@
-vim.pack.add({ Gh("p00f/clangd_extensions.nvim") })
+local M = {}
 
-require("clangd_extensions").setup({
+M.defaults = {
   inlay_hints = {
     inline = true,
   },
   ast = {
-    --These require codicons (https://github.com/microsoft/vscode-codicons)
     role_icons = {
       type = "",
       declaration = "",
@@ -24,4 +23,10 @@ require("clangd_extensions").setup({
       TemplateParamObject = "",
     },
   },
-})
+}
+
+vim.pack.add({ Gh("p00f/clangd_extensions.nvim") })
+
+require("clangd_extensions").setup(M.defaults)
+
+return M
